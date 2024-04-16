@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cinemas', function (Blueprint $table) {
+        Schema::create('cinema_timeslots', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('rows_number');
-            $table->integer('seat_number');
-            $table->string('logo_img');
+            $table->foreignId('cinema_id')->constrained();
+            $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']);
+            $table->time('from');
+            $table->time('to');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cinemas');
+        Schema::dropIfExists('cinema_timeslots');
     }
 };

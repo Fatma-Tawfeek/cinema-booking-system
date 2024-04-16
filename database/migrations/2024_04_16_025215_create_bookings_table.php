@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('schedule_id')->constrained()->onDelete('cascade');
-            $table->string('booked_seats');
-            $table->string('total_price');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('movie_id')->constrained();
+            $table->foreignId('cinema_id')->constrained();
+            $table->foreignId('cinema_timeslot_id')->constrained();
+            $table->foreignId('cinema_movies_schedule_id')->constrained();
+            $table->date('date');
+            $table->time('from');
+            $table->time('to');
             $table->timestamps();
         });
     }

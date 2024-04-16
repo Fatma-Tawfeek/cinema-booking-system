@@ -15,12 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('image');
+            $table->string('poster_img');
             $table->time('duration');
             $table->date('release_date');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->json('actors');
-            $table->string('language');
             $table->enum('status', ['upcoming', 'showing_now'])->default('showing_now');
             $table->timestamps();
         });

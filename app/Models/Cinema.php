@@ -9,5 +9,5 @@ class Cinema extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'rows_number', 'seat_number'];
+    protected $fillable = ['name', 'rows_number', 'seat_number', 'logo_img'];
 }

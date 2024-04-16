@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cinemas', function (Blueprint $table) {
+        Schema::create('seats', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('rows_number');
-            $table->integer('seat_number');
-            $table->string('logo_img');
+            $table->enum('type', ['regular', 'vip']);
+            $table->foreignId('booking_id')->nullable()->constrained();
+            $table->foreignId('cinema_id')->constrained();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cinemas');
+        Schema::dropIfExists('seats');
     }
 };
