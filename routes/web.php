@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +27,9 @@ Route::group([
 ], function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+    // Category Routes
+    Route::resource('categories', CategoryController::class);
 });
 
 Route::get('/admin/login', [AdminController::class, 'getLoginPage']);
