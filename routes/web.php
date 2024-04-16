@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ActorController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 
@@ -30,6 +31,8 @@ Route::group([
 
     // Category Routes
     Route::resource('categories', CategoryController::class);
+    // Actors Routes
+    Route::resource('actors', ActorController::class);
 });
 
 Route::get('/admin/login', [AdminController::class, 'getLoginPage']);
