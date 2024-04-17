@@ -79,7 +79,7 @@ class ActorController extends Controller
             'profile_img' => $path ?? $actor->profile_img,
         ]);
 
-        return redirect()->route('admin.actors.index')->with('success', 'Actor updated successfully');
+        return redirect()->back()->with('success', 'Actor updated successfully');
     }
 
     /**
@@ -87,8 +87,9 @@ class ActorController extends Controller
      */
     public function destroy(Actor $actor)
     {
-        @unlink('storage/' . $actor->profile_img);
+        $actor->movies()->detach();
         $actor->delete();
+        @unlink('storage/' . $actor->profile_img);
         return redirect()->route('admin.actors.index')->with('success', 'Actor deleted successfully');
     }
 }

@@ -66,6 +66,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $category->movies()->detach();
         $category->delete();
         return redirect()->back()->with('success', 'Category deleted successfully.');
     }

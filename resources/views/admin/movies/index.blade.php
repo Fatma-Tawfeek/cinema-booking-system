@@ -69,13 +69,13 @@
                                     <div class="btn-group">
                                         <a href="{{ route('admin.movies.edit', $movie->id) }}" class="btn btn-primary mr-2">
                                           <i class="fas fa-edit"></i>                                          
-                                          </a>
+                                          Edit</a>
                                         <form action="{{ route('admin.movies.destroy', $movie->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger">
                                               <i class="fas fa-trash"></i> 
-                                              </button>
+                                              Delete</button>
                                         </form>
                                     </div>
                                 </td>

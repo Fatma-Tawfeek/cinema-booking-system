@@ -15,6 +15,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  <style>
+    .btn-primary {
+      border-top-right-radius: 4px !important; 
+      border-bottom-right-radius: 4px !important;
+    }
+  </style>
   @stack('styles')
 </head>
 <body class="hold-transition sidebar-mini">

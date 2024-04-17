@@ -39,7 +39,7 @@ class MovieController extends Controller
             'category_id' => 'required|array',
             'category_id.*' => 'required|integer|exists:categories,id',
             'release_date' => 'required|date',
-            'duration' => 'required|integer',
+            'duration' => 'required|integer|min:30|max:240',
             'actor_id' => 'required|array',
             'actor_id.*' => 'required|integer|exists:actors,id',
             'description' => 'required|string',
@@ -112,7 +112,7 @@ class MovieController extends Controller
         $movie->categories()->sync($request->category_id);
         $movie->actors()->sync($request->actor_id);
 
-        return redirect()->route('admin.movies.index')->with('success', 'Movie updated successfully');
+        return redirect()->back()->with('success', 'Movie updated successfully');
     }
 
     /**
