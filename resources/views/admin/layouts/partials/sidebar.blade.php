@@ -73,6 +73,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.movies.index') }}" class="nav-link {{ request()->is('admin/movies*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-film"></i>
+              <p>
+                Movies
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

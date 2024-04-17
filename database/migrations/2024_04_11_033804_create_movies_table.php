@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('poster_img');
-            $table->time('duration');
+            $table->string('duration');
             $table->date('release_date');
             $table->enum('status', ['upcoming', 'showing_now'])->default('showing_now');
             $table->timestamps();
