@@ -81,6 +81,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.cinemas.index') }}" class="nav-link {{ request()->is('admin/cinemas*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-theater-masks"></i>
+              <p>
+                Cinemas
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

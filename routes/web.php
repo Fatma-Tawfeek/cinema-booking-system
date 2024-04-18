@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ActorController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MovieController;
+use App\Http\Controllers\Admin\CinemaController;
 use App\Http\Controllers\Admin\CategoryController;
 
 /*
@@ -36,6 +37,8 @@ Route::group([
     Route::resource('actors', ActorController::class);
     // Movie Routes
     Route::resource('movies', MovieController::class);
+    // Cinema Routes
+    Route::resource('cinemas', CinemaController::class);
 });
 
 Route::get('/admin/login', [AdminController::class, 'getLoginPage']);

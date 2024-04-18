@@ -1,10 +1,10 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Movies')
+@section('title', 'Cinemas')
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Movies</li>
+<li class="breadcrumb-item active">Cinemas</li>
 @endSection
 
 @section('content')
@@ -14,9 +14,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Movies List</h3>
+                      <h3 class="card-title">Cinemas List</h3>
                       <div class="float-right">
-                        <a href="{{ route('admin.movies.create') }}" class="btn btn-primary">Add Movie</a>
+                        <a href="{{ route('admin.cinemas.create') }}" class="btn btn-primary">Add Cinema</a>
                     </div>
                     </div>
                     <!-- /.card-header -->
@@ -26,44 +26,26 @@
                           <tr>
                             <th style="width: 10px">#</th>
                             <th>Image</th>
-                            <th>Title</th>
-                            <th>description</th>
-                            <th>Categories</th>
-                            <th>Duration</th>
-                            <th>Release Date</th>
-                            <th>Status</th>
+                            <th>Name</th>
+                            <th>Number of Seats</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @forelse ($movies as $movie)
+                            @forelse ($cinemas as $cinema)
                             <tr>
-                                <td>{{ $movies->firstItem() + $loop->index }}</td>
+                                <td>{{ $cinemas->firstItem() + $loop->index }}</td>
                                 <td>
-                                    <img src="{{ asset(  'storage/' . $movie->poster_img) }}" alt="" style="width: 50px;height: 50px; border-radius: 50%">
+                                    <img src="{{ asset(  'storage/' . $cinema->logo_img) }}" alt="" style="width: 50px;height: 50px; border-radius: 50%">
                                 </td>
-                                <td>{{ $movie->title }}</td>
-                                <td>{{ Str::limit($movie->description, 100) }}</td>
-                                <th style="width: 200px">
-                                  @foreach ($movie->categories as $cat)
-                                      <span class="badge badge-primary">{{ $cat->name }}</span>
-                                  @endforeach
-                                </th>
-                                <td>{{ $movie->duration }} Mins</td>
-                                <td>{{ date('d M Y', strtotime($movie->release_date)) }}</td>
-                                <td>
-                                  @if ($movie->status == 'showing_now')
-                                    <span class="badge badge-success">Showing Now</span>
-                                  @else
-                                    <span class="badge badge-warning">Up Coming</span>
-                                  @endif
-                                </td>
+                                <td>{{ $cinema->name }}</td>
+                                <td>{{ $cinema->seats()->count() }}</td>
                                 <td> 
                                     <div class="btn-group">
-                                        <a href="{{ route('admin.movies.edit', $movie->id) }}" class="btn btn-primary mr-2">
+                                        <a href="{{ route('admin.cinemas.edit', $cinema->id) }}" class="btn btn-primary mr-2">
                                           <i class="fas fa-edit"></i>                                          
                                           Edit</a>
-                                        <form action="{{ route('admin.movies.destroy', $movie->id) }}" method="post">
+                                        <form action="{{ route('admin.cinemas.destroy', $cinema->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger">
@@ -75,7 +57,7 @@
                             </tr>      
                             @empty
                                 <tr>
-                                    <td colspan="9">No movies found.</td>
+                                    <td colspan="5">No cinemas found.</td>
                                 </tr>                          
                             @endforelse                          
                         </tbody>
@@ -83,7 +65,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                      {{ $movies->links() }}
+                      {{ $cinemas->links() }}
                     </div>
                   </div>
             </div>

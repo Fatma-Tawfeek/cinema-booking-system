@@ -10,4 +10,9 @@ class Cinema extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'rows_number', 'seat_number', 'logo_img'];
+
+    public function seats()
+    {
+        return $this->hasMany(Seat::class);
+    }
 }

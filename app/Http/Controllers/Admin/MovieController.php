@@ -48,7 +48,7 @@ class MovieController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images/movie', 'public');
+            $path = $request->file('image')->store('images/movies', 'public');
         }
 
         $movie = Movie::create([
@@ -97,7 +97,7 @@ class MovieController extends Controller
 
         if ($request->hasFile('image')) {
             @unlink('storage/' . $movie->poster_img);
-            $path = $request->file('image')->store('images/movie', 'public');
+            $path = $request->file('image')->store('images/movies', 'public');
         }
 
         $movie->update([

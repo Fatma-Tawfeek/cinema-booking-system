@@ -95,7 +95,7 @@
                       @enderror
                     </div>
                     <div class="form-group">
-                      <label>Profile Image</label> <br>
+                      <label>Poster Image</label> <br>
                       <img src="{{ asset('storage/images/movies/default.png') }}" class="img-size-50 mr-3 mb-2" alt="" id="blah">
                       <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="imgInp">
                       @error('image')
