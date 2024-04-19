@@ -36,7 +36,7 @@ class CinemaController extends Controller
             'name' => 'required|string|max:255',
             'num_of_rows' => 'required|integer|min:1|max:1000',
             'num_of_columns' => 'required|integer|min:1|max:1000',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
@@ -47,7 +47,7 @@ class CinemaController extends Controller
             'name' => $request->name,
             'rows_number' => $request->num_of_rows,
             'seat_number' => $request->num_of_columns,
-            'logo_img' => $path ?? 'default.png',
+            'logo_img' => $path ?? 'images/cinemas/default.png',
         ]);
 
         // bulk insert into seats table with cinema id

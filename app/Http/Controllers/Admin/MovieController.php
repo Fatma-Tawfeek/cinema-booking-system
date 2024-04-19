@@ -44,7 +44,7 @@ class MovieController extends Controller
             'actor_id.*' => 'required|integer|exists:actors,id',
             'description' => 'required|string',
             'status' => 'required|in:showing_now,upcoming',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
@@ -57,7 +57,7 @@ class MovieController extends Controller
             'duration' => $request->duration,
             'description' => $request->description,
             'status' => $request->status,
-            'poster_img' => $path ?? 'default.png',
+            'poster_img' => $path ?? 'images/movies/default.png',
         ]);
 
         $movie->categories()->attach($request->category_id);

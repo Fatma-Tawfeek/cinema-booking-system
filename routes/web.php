@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\CinemaController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\TimeslotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ Route::group([
     Route::resource('movies', MovieController::class);
     // Cinema Routes
     Route::resource('cinemas', CinemaController::class);
+    // Cinema Timeslots Routes
+    Route::resource('timeslots', TimeslotController::class);
 });
 
 Route::get('/admin/login', [AdminController::class, 'getLoginPage']);

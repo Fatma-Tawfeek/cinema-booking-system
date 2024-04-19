@@ -33,7 +33,7 @@ class ActorController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'nationality' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
@@ -43,7 +43,7 @@ class ActorController extends Controller
         Actor::create([
             'name' => $request->name,
             'nationality' => $request->nationality,
-            'profile_img' => $path ?? 'default.png',
+            'profile_img' => $path ?? 'images/actors/default.png',
         ]);
 
         return redirect()->route('admin.actors.index')->with('success', 'Actor created successfully');
