@@ -25,6 +25,7 @@
                     <div class="form-group">
                       <label for="">Cinemas</label> <br>
                       <select class="js-example-basic-single form-control @error('cinema_id') is-invalid @enderror" name="cinema_id">
+                        <option value="">Select Cinema</option>
                         @foreach ($cinemas as $cinema)
                           <option value="{{ $cinema->id }}">{{ $cinema->name }}</option>
                         @endforeach
@@ -38,6 +39,7 @@
                     <div class="form-group">
                       <label for="">Day</label> <br>
                       <select class="form-control @error('day') is-invalid @enderror" name="day" >
+                          <option value="">Select Day</option>
                           <option value="monday">Monday</option>
                           <option value="tuesday">Tuesday</option>
                           <option value="wednesday">Wednesday</option>
@@ -55,8 +57,8 @@
                     <div class="row">
                       <div class="form-group col-md-6">
                         <label>Start Time</label>
-                        <input type="time" class="form-control @error('start_time') is-invalid @enderror" placeholder="Enter start time" value="{{ old('start_time') }}" name="from">
-                        @error('start_time')
+                        <input type="time" class="form-control @error('from') is-invalid @enderror" placeholder="Enter start time" value="{{ old('from') }}" name="from">
+                        @error('from')
                         <div class="invalid-feedback">
                           {{ $message }}
                         </div>
@@ -64,8 +66,8 @@
                       </div>
                       <div class="form-group col-md-6">
                         <label>End Time</label>
-                        <input type="time" class="form-control @error('end_time') is-invalid @enderror" placeholder="Enter end time" value="{{ old('end_time') }}" name="to"> 
-                        @error('end_time')
+                        <input type="time" class="form-control @error('to') is-invalid @enderror" placeholder="Enter end time" value="{{ old('to') }}" name="to"> 
+                        @error('to')
                         <div class="invalid-feedback">
                           {{ $message }}
                         </div>

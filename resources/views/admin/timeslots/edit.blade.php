@@ -56,8 +56,8 @@
                     <div class="row">
                       <div class="form-group col-md-6">
                         <label>Start Time</label>
-                        <input type="time" class="form-control @error('start_time') is-invalid @enderror" placeholder="Enter start time" value="{{ $timeslot->from }}" name="from">
-                        @error('start_time')
+                        <input type="time" class="form-control @error('from') is-invalid @enderror" placeholder="Enter start time" value="{{ $timeslot->from }}" name="from">
+                        @error('from')
                         <div class="invalid-feedback">
                           {{ $message }}
                         </div>
@@ -65,8 +65,8 @@
                       </div>
                       <div class="form-group col-md-6">
                         <label>End Time</label>
-                        <input type="time" class="form-control @error('end_time') is-invalid @enderror" placeholder="Enter end time" value="{{ $timeslot->to }}" name="to"> 
-                        @error('end_time')
+                        <input type="time" class="form-control @error('to') is-invalid @enderror" placeholder="Enter end time" value="{{ $timeslot->to }}" name="to"> 
+                        @error('to')
                         <div class="invalid-feedback">
                           {{ $message }}
                         </div>

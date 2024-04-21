@@ -18,7 +18,7 @@ class CinemaMoviesSchedule extends Model
 
     public function timeslot()
     {
-        return $this->belongsTo(CinemaTimeslot::class);
+        return $this->belongsTo(CinemaTimeslot::class, 'cinema_timeslot_id');
     }
 
     public function cinema()

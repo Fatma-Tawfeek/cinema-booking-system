@@ -36,8 +36,8 @@ class TimeslotController extends Controller
         $request->validate([
             'cinema_id' => 'required|integer|exists:cinemas,id',
             'day' => 'required|in:monday,tuesday,wednesday,thursday,friday,saturday,sunday',
-            'from' => 'required|date_format:H:i',
-            'to' => 'required|date_format:H:i|after:from',
+            'from' => 'required',
+            'to' => 'required|after:from',
         ]);
 
         CinemaTimeslot::create([
