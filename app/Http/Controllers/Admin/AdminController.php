@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Movie;
+use App\Models\Cinema;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +14,11 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.index');
+        $cinemas_count = Cinema::count();
+        $users_count = User::where('role', 'user')->count();
+        $bookings_count = Booking::count();
+        $movies_count = Movie::count();
+        return view('admin.index', compact('cinemas_count', 'users_count', 'bookings_count', 'movies_count'));
     }
 
     public function getLoginPage()
