@@ -23,12 +23,17 @@ class Booking extends Model
 
     public function timeslot()
     {
-        return $this->belongsTo(CinemaTimeslot::class);
+        return $this->belongsTo(CinemaTimeslot::class, 'cinema_timeslot_id');
     }
 
     public function schedule()
     {
-        return $this->belongsTo(CinemaMoviesSchedule::class);
+        return $this->belongsTo(CinemaMoviesSchedule::class, 'cinema_movies_schedule_id');
+    }
+
+    public function cinema()
+    {
+        return $this->belongsTo(Cinema::class);
     }
 
     public function seats()

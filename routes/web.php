@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ActorController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\CinemaController;
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\TimeslotController;
@@ -46,6 +47,9 @@ Route::group([
     // Cinema Movies Schedule Routes
     Route::resource('schedules', ScheduleController::class);
     Route::get('schedules/{cinema}/timeslots', [ScheduleController::class, 'timeslots'])->name('schedules.timeslots');
+    // Bookings Routes
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::delete('/bookings/{booking}/cancel', [BookingController::class, 'destroy'])->name('bookings.destroy');
 });
 
 Route::get('/admin/login', [AdminController::class, 'getLoginPage']);
