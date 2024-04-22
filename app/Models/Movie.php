@@ -20,4 +20,9 @@ class Movie extends Model
     {
         return $this->belongsToMany(Actor::class);
     }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class, 'movie_id');
+    }
 }

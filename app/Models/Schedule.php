@@ -9,6 +9,8 @@ class Schedule extends Model
 {
     use HasFactory;
 
+    protected $table = 'cinema_movies_schedules';
+
     protected $fillable = ['movie_id', 'cinema_id', 'date', 'time', 'price'];
 
     public function movie()

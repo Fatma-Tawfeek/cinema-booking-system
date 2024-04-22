@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\CinemaController;
 use App\Http\Controllers\Admin\BookingController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\TimeslotController;
@@ -21,9 +22,8 @@ use App\Http\Controllers\Admin\TimeslotController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Frontend Routes
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Admin Routes
 Route::group([
