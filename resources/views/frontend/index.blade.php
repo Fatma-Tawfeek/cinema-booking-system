@@ -28,21 +28,21 @@
     <div class="swiper-pagination"></div>
 </section>
 <!-- Movies -->
-<section class="movies" id="movies">
+{{-- <section class="movies" id="movies">
     <h2 class="heading">Coming This Week</h2>
     <!-- Serach Bar-->
     <div id="filter-container">
-        <form action="" id="search-form" method="get">
+        <form action="{{ route('home') }}" id="search-form" method="get">
         <label class="label-search" for="name"></label><br /><br />
-        <input type="text" class="input-search" id="name-filter" placeholder="Name" name="search" />
+        <input type="text" class="input-search" id="name-filter" placeholder="Name" name="search" value="{{ request()->get('search') }}" />
         <select id="category-filter" name="category_id">
             <option value="" selected disabled>Category</option>
             @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option value="{{ $category->id }}" {{ request()->get('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
             @endforeach
         </select>
-        <input type="date" class="input-search" id="date-filter" name="date" />
-        <button onclick="applyFilters()" id="apply-filter" type="submit">Apply Filters</button>
+        <input type="date" class="input-search" id="date-filter" name="date" value="{{ request()->get('date') }}" />
+        <button id="apply-filter" type="button">Apply Filters</button>
         </form>
     </div>
 
@@ -76,6 +76,35 @@
             </div>
         </div>
         @endforeach
+    </div>
+</section> --}}
+<section class="movies" id="movies">
+    <h2 class="heading">Coming This Week</h2>
+    <!-- Search Bar-->
+    <div id="filter-container">
+        <form id="search-form" method="get">
+            <label class="label-search" for="name"></label><br /><br />
+            <input type="text" class="input-search" id="name-filter" placeholder="Name" name="search" value="{{ request()->get('search') }}" />
+            <select id="category-filter" name="category_id">
+                <option value="" selected disabled>Category</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ request()->get('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                @endforeach
+            </select>
+            <input type="date" class="input-search" id="date-filter" name="date" value="{{ request()->get('date') }}" />
+            <button id="apply-filter" type="button">Apply Filters</button>
+        </form>
+    </div>
+
+    <div id="result-container">
+        <!-- Display filtered results here -->
+        {{-- @include('frontend.filtered_movies') --}}
+    </div>
+
+    <!-- Movies Container -->
+    <div class="movies-container">
+        <!-- Display slider movies, coming soon movies, etc. -->
+        @include('frontend.filtered_movies')
     </div>
 </section>
 <!-- Comming Soon-->
@@ -111,3 +140,22 @@
     </div>
 </section>
 @endsection
+
+@push('scripts')
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#apply-filter').click(function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            var formData = $('#search-form').serialize(); // Serialize form data
+
+            $.get('/', formData, function(response) {
+                $('#result-container').html(response); // Update results container
+            });
+        });
+    });
+</script>
+    
+@endpush

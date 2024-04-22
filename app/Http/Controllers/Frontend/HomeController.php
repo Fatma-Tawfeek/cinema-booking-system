@@ -32,6 +32,10 @@ class HomeController extends Controller
 
         $comingSoonMovies = Movie::where('status', 'upcoming')->limit(4)->get();
 
+        if ($request->ajax()) {
+            return view('frontend.filtered_movies', compact('filteredMovies'));
+        }
+
         return view('frontend.index', compact('sliderMovies', 'filteredMovies', 'categories', 'comingSoonMovies'));
     }
 }
