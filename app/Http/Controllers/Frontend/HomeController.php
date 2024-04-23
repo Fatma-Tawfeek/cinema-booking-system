@@ -24,6 +24,7 @@ class HomeController extends Controller
                 $query->whereDate('date', $request->date);
             });
         })
+            ->where('status', 'showing_now')
             ->with('categories', 'schedules')
             ->limit(4)
             ->get();
