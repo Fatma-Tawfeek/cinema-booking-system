@@ -1,5 +1,5 @@
 <header class="header-nav">
-    <a href="{{ route('home') }}" class="logo"> <i class="bx bxs-camera-movie"></i> POPCORN </a>
+    <a href="{{ route('home') }}" class="logo"> <i class="bx bxs-camera-movie"></i> CineMingle </a>
 
     <!-- Menu -->
     <ul class="navbar">
@@ -8,5 +8,15 @@
         <li><a href="#coming">Coming</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="signin.html" class="btn">Sign In</a>
+    @guest
+    <a href="{{ route('login') }}" class="btn">Sign In</a>
+    @endguest
+
+    @auth
+    <form action="{{ route('logout') }}" method="post" id="logout-form">
+        @csrf
+        <button type="submit" class="btn">Sign Out</button>
+    </form>
+    @endauth
+
 </header>

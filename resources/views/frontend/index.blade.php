@@ -1,4 +1,5 @@
 @extends('frontend.layouts.master')
+@section('title', 'Home')
 @section('content')
 <!-- Home -->
 <section class="home swiper" id="home">

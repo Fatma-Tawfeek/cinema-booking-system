@@ -4,8 +4,9 @@
         <meta charset="UTF-8" />
         <meta http-equi="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Movie Ticket</title>
+        <title>@yield('title') | CineMingle</title>
         <link rel="stylesheet" href="{{ asset('frontend/style.css') }}" />
+        <link rel="icon" href="{{ asset('frontend/img/favicon.png') }}" type="image/x-icon">
         <!--Box Icons-->
         <link
             rel="stylesheet"

@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\TimeslotController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +53,9 @@ Route::group([
     Route::delete('/bookings/{booking}/cancel', [BookingController::class, 'destroy'])->name('bookings.destroy');
 });
 
-Route::get('/admin/login', [AdminController::class, 'getLoginPage']);
-Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+Route::middleware('guest')->group(function () {
+    Route::get('/admin/login', [AdminController::class, 'getLoginPage']);
+    Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+});
 
 require __DIR__ . '/auth.php';
