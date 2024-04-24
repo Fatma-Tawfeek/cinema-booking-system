@@ -39,4 +39,17 @@ class HomeController extends Controller
 
         return view('frontend.index', compact('sliderMovies', 'filteredMovies', 'categories', 'comingSoonMovies'));
     }
+
+    public function show(Movie $movie)
+    {
+        $selectedCategories = $movie->categories->pluck('id');
+        $commanMovies = Movie::with('categories')->whereHas('categories', function ($query) use ($selectedCategories) {
+            $query->whereIn('id', $selectedCategories);
+        })
+            ->where('status', 'showing_now')
+            ->where('id', '!=', $movie->id)
+            ->limit(4)
+            ->get();
+        return view('frontend.movie', compact('movie', 'commanMovies'));
+    }
 }

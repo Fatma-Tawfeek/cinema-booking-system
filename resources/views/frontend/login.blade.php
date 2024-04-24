@@ -14,19 +14,29 @@
         <!------------------- login form -------------------------->
 
         <div class="login-container" id="login">
-            <form action="{{ route('login.post') }}" method="post">
+            <form action="{{ route('login.post') }}" method="post" id="login-form">
                 @csrf
             <div class="top">
                 <span>Don't have an account? <a href="#" onclick="register()">Sign Up</a></span>
                 <header class="header-s">Login</header>
             </div>
             <div class="input-box">
-                <input type="text" class="input-field" placeholder="Email" name="email">
+                <input type="text" class="input-field @error('email') is-invalid @enderror" placeholder="Email" name="email">
                 <i class="bx bx-user"></i>
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="input-box">
-                <input type="password" class="input-field" placeholder="Password" name="password">
+                <input type="password" class="input-field @error('password') is-invalid @enderror" placeholder="Password" name="password">
                 <i class="bx bx-lock-alt"></i>
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="input-box">
                 <input type="submit" class="submit" value="Sign In">
@@ -46,7 +56,7 @@
         <!------------------- registration form -------------------------->
         
         <div class="register-container" id="register">
-            <form action="{{ route('register') }}" method="post">
+            <form action="{{ route('register') }}" method="post" id="register-form">
                 @csrf
             <div class="top">
                 <span>Have an account? <a href="#" onclick="login()">Login</a></span>
@@ -54,21 +64,41 @@
             </div>
             <div class="two-forms">
                 <div class="input-box">
-                    <input type="text" class="input-field" placeholder="Firstname" name="first_name">
+                    <input type="text" class="input-field @error('first_name') is-invalid @enderror" placeholder="Firstname" name="first_name">
                     <i class="bx bx-user"></i>
+                    @error('first_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="input-box">
-                    <input type="text" class="input-field" placeholder="Lastname" name="last_name">
+                    <input type="text" class="input-field @error('last_name') is-invalid @enderror" placeholder="Lastname" name="last_name">
                     <i class="bx bx-user"></i>
+                    @error('last_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <div class="input-box">
-                <input type="text" class="input-field" placeholder="Email" name="email">
+                <input type="text" class="input-field @error('email') is-invalid @enderror" placeholder="Email" name="email">
                 <i class="bx bx-envelope"></i>
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="input-box">
-                <input type="password" class="input-field" placeholder="Password" name="password">
+                <input type="password" class="input-field @error('password') is-invalid @enderror" placeholder="Password" name="password">
                 <i class="bx bx-lock-alt"></i>
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="input-box">
                 <input type="submit" class="submit" value="Register">

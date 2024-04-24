@@ -25,6 +25,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Frontend Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/movies/{movie}', [HomeController::class, 'show'])->name('movies.show');
 
 // Admin Routes
 Route::group([

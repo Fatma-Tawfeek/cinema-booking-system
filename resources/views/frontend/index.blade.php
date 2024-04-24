@@ -6,7 +6,7 @@
     <div class="swiper-wrapper">
         @foreach ($sliderMovies as $movie)
             <div class="swiper-slide container">
-                <img src="{{ asset('storage/' . $movie->poster_img) }}" />
+                <img src="{{ asset('storage/' . $movie->poster_img) }}" style="background: rgba(0, 0, 0, 0.5)" />
                 <div class="home-text">
                     <span>
                         @foreach ($movie->categories as $movieCategory)
@@ -17,8 +17,8 @@
                         @endforeach
                     </span>
                     <h1>{{ $movie->title }}</h1>
-                    <a href="information.html" class="btn">Book Now</a>
-                    <a href="information.html" class="play">
+                    <a href="{{ route('movies.show', $movie->id) }}" class="btn">Book Now</a>
+                    <a href="{{ route('movies.show', $movie->id) }}" class="play">
                         <i class="bx bx-play-circle"></i>
                     </a>
                 </div>
@@ -29,56 +29,6 @@
     <div class="swiper-pagination"></div>
 </section>
 <!-- Movies -->
-{{-- <section class="movies" id="movies">
-    <h2 class="heading">Coming This Week</h2>
-    <!-- Serach Bar-->
-    <div id="filter-container">
-        <form action="{{ route('home') }}" id="search-form" method="get">
-        <label class="label-search" for="name"></label><br /><br />
-        <input type="text" class="input-search" id="name-filter" placeholder="Name" name="search" value="{{ request()->get('search') }}" />
-        <select id="category-filter" name="category_id">
-            <option value="" selected disabled>Category</option>
-            @foreach ($categories as $category)
-                <option value="{{ $category->id }}" {{ request()->get('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-            @endforeach
-        </select>
-        <input type="date" class="input-search" id="date-filter" name="date" value="{{ request()->get('date') }}" />
-        <button id="apply-filter" type="button">Apply Filters</button>
-        </form>
-    </div>
-
-    <div id="result-container">
-        <!-- Display filtered results here -->
-    </div>
-
-    <!--Movies Container-->
-    <div class="movies-container">
-        @foreach ($filteredMovies as $movie )
-            <!-- Box 1-->
-        <div class="box">
-            <div class="box-img">
-                <a href="information.html">
-                    <img src="{{ asset('storage/' . $movie->poster_img) }}" alt="" />
-                </a>
-            </div>
-            <div class="textinfo">
-                <a href="information.html" style="font-size: 18px; color: aliceblue"
-                    >{{ $movie->title }}</a
-                ><br />
-                <span>
-                    @foreach ($movie->categories as $movieCategory)
-                            {{ $movieCategory->name }}
-                            @if(!$loop->last)
-                                ,
-                            @endif                            
-                        @endforeach
-                         | {{ $movie->duration }} MIN
-                        </span><br />
-            </div>
-        </div>
-        @endforeach
-    </div>
-</section> --}}
 <section class="movies" id="movies">
     <h2 class="heading">Coming This Week</h2>
     <!-- Search Bar-->
@@ -87,7 +37,7 @@
             <label class="label-search" for="name"></label><br /><br />
             <input type="text" class="input-search" id="name-filter" placeholder="Name" name="search" value="{{ request()->get('search') }}" />
             <select id="category-filter" name="category_id">
-                <option value="" selected disabled>Category</option>
+                <option value="" selected>Category</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" {{ request()->get('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                 @endforeach
@@ -117,12 +67,12 @@
         <!-- Box 1-->
         <div class="box">
             <div class="box-img">
-                <a href="information.html">
+                <a href="{{ route('movies.show', $movie->id) }}">
                     <img src="{{ asset('storage/' . $movie->poster_img) }}" alt="" />
                 </a>
             </div>
             <div class="textinfo">
-                <a href="information.html" style="font-size: 18px; color: aliceblue"
+                <a href="{{ route('movies.show', $movie->id) }}" style="font-size: 18px; color: aliceblue"
                     >{{ $movie->title }}</a
                 ><br />
                 <span>
