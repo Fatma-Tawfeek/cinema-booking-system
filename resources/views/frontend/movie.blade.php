@@ -32,7 +32,7 @@
         </p>
         <p> Language: English </p>
         @if($movie->status == 'showing_now')
-        <a href = "schedule.html" class="book-now">Book Now</a>
+        <a href = "{{ route('bookings.timeslots', $movie->id) }}" class="book-now">Book Now</a>
         @else
         <a href = "#" class="book-now">Coming Soon</a>
         @endif

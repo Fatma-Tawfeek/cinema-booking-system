@@ -55,7 +55,6 @@ class CinemaController extends Controller
         for ($i = 0; $i < $num_of_seats; $i++) {
             Seat::create([
                 'cinema_id' => $cinema->id,
-                'name' => $i,
                 'type' => 'regular'
             ]);
         }
@@ -94,7 +93,6 @@ class CinemaController extends Controller
             for ($i = 0; $i < $num_of_seats; $i++) {
                 Seat::create([
                     'cinema_id' => $cinema->id,
-                    'name' => $i,
                     'type' => 'regular'
                 ]);
             }

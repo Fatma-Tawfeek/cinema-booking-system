@@ -23,6 +23,6 @@ class CinemaMoviesSchedule extends Model
 
     public function cinema()
     {
-        return $this->belongsTo(Cinema::class);
+        return $this->belongsTo(Cinema::class, 'cinema_id');
     }
 }

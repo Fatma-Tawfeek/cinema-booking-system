@@ -22,4 +22,9 @@ class Schedule extends Model
     {
         return $this->belongsTo(Cinema::class);
     }
+
+    public function timeslot()
+    {
+        return $this->belongsTo(CinemaTimeslot::class, 'cinema_timeslot_id');
+    }
 }

@@ -28,7 +28,6 @@
                             <th>Date</th>
                             <th>From</th>
                             <th>To</th>
-                            <th>Seats</th>
                             <th>Total Price</th>
                             <th>Action</th>
                           </tr>
@@ -43,8 +42,7 @@
                                 <td>{{ date('d M Y', strtotime($booking->date)) }}</td>   
                                 <td>{{ date('h:i A', strtotime($booking->timeslot->from)) }}</td>
                                 <td>{{ date('h:i A', strtotime($booking->timeslot->to)) }}</td>
-                                <td>{{ $booking->seats }}</td>
-                                <td>{{ $booking->schedule->ticket_price * count($booking->seats) }} leke</td>
+                                <td>{{ $booking->total_price }} leke</td>
                                 <td> 
                                     <div class="btn-group">
                                         <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="post">

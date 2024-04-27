@@ -22,7 +22,8 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking)
     {
+        $booking->seats()->detach();
         $booking->delete();
-        return redirect()->route('admin.bookings.index');
+        return redirect()->route('admin.bookings.index')->with('success', 'Booking cancelled successfully');
     }
 }

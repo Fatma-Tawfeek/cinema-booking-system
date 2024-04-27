@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->enum('type', ['regular', 'vip']);
-            $table->foreignId('booking_id')->nullable()->constrained();
             $table->foreignId('cinema_id')->constrained();
             $table->timestamps();
         });

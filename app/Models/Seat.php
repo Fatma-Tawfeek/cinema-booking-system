@@ -9,11 +9,11 @@ class Seat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cinema_id', 'name', 'type', 'booking_id'];
+    protected $fillable = ['cinema_id', 'name', 'type'];
 
-    public function booking()
+    public function bookings()
     {
-        return $this->belongsTo(Booking::class);
+        return $this->belongsToMany(Booking::class);
     }
 
     public function cinema()

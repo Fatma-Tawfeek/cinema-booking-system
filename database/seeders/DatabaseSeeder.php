@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             MovieSeeder::class,
-            CategoryMovieSeeder::class
+            CategoryMovieSeeder::class,
+            ActorSeeder::class,
+            ActorMovieSeeder::class,
         ]);
     }
 }
