@@ -17,6 +17,11 @@ class BookingController extends Controller
         return view('admin.bookings.index', compact('bookings'));
     }
 
+    public function show(Booking $booking)
+    {
+        return view('admin.bookings.show', compact('booking'));
+    }
+
     /**
      * Remove the specified resource from storage.
      */

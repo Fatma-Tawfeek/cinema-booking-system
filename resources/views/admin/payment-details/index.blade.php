@@ -1,10 +1,10 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Bookings')
+@section('title', 'Payment Details')
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Bookings</li>
+<li class="breadcrumb-item active">Payment Details</li>
 @endSection
 
 @section('content')
@@ -14,7 +14,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Bookings List</h3>
+                      <h3 class="card-title">Payment Details List</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -22,44 +22,44 @@
                         <thead>
                           <tr>
                             <th style="width: 10px">#</th>
-                            <th>User</th>
-                            <th>Movie</th>
-                            <th>Cinema</th>
-                            <th>Showing time</th>
-                            <th>Booking date</th>
-                            <th>Total Price</th>
+                            <th>Status</th>
+                            <th>Method</th>
+                            <th>Payment Id</th>
+                            <th>Amount</th>
+                            <th>Date</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @forelse ($bookings as $booking)
+                            @forelse ($paymentDetails as $paymentDetail)
                             <tr>
-                                <td>{{ $bookings->firstItem() + $loop->index }}</td>
-                                <td>{{ $booking->user->full_name }}</td>
-                                <td>{{ $booking->movie->title }}</td>
-                                <td>{{ $booking->cinema->name }}</td> 
-                                <td>{{ date('d M Y', strtotime($booking->date)) }} <br> {{ date('h:i A', strtotime($booking->timeslot->from)) }} - {{ date('h:i A', strtotime($booking->timeslot->to)) }}</td>   
-                                <td>{{ date('d M Y', strtotime($booking->created_at)) }}</td>
-                                <td>{{ $booking->grand_total }} USD</td>
+                                <td>{{ $paymentDetails->firstItem() + $loop->index }}</td>
+                                <td>
+                                    @if ($paymentDetail->status == 'paid')
+                                        <span class="badge badge-success">Paid</span>
+                                    @else
+                                        <span class="badge badge-danger">Failed</span>
+                                    @endif
+                                </td>
+                                <td><img src="{{ asset('../../dist/img/credit/visa.png') }}" alt=""></td>
+                                <td>{{ $paymentDetail->payment_id }}</td> 
+                                <td>{{ $paymentDetail->amount }}$</td>   
+                                <td>{{ date('d M Y', strtotime($paymentDetail->created_at)) }}</td>
                                 <td> 
                                     <div class="btn-group">
-                                        <a href="{{ route('admin.bookings.show', $booking->id) }}" class="btn btn-primary mr-2">
-                                        <i class="fas fa-eye"></i>
-                                        show
-                                        </a>
-                                        <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="post">
+                                        <form action="{{ route('admin.paymentDetails.destroy', $paymentDetail->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger">
                                               <i class="fas fa-trash"></i> 
-                                              Cancel</button>
+                                              Delete</button>
                                         </form>
                                     </div>
                                 </td>
                             </tr>      
                             @empty
                                 <tr>
-                                    <td colspan="10">No bookings found.</td>
+                                    <td colspan="10">No payments found.</td>
                                 </tr>                          
                             @endforelse                          
                         </tbody>
@@ -67,7 +67,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                      {{ $bookings->links() }}
+                      {{ $paymentDetails->links() }}
                     </div>
                   </div>
             </div>

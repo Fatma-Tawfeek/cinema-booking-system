@@ -98,6 +98,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.paymentDetails.index') }}" class="nav-link {{ request()->is('admin/payment-details*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-credit-card"></i>
+              <p>
+                Payment Details
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

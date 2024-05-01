@@ -84,6 +84,7 @@ class BookingController extends Controller
             'from' => $timeslot->from,
             'to' => $timeslot->to,
             'user_id' => auth()->user()->id,
+            'status' => 'failed',
 
         ]);
 
@@ -128,15 +129,14 @@ class BookingController extends Controller
                 'processing_channel_id' => 'pc_rlwcnkgu4pzujf6qmk7iyasbee',
             ]);
 
-        if ($response->successful()) {
-            $data = $response->json();
-            $status = 'paid'; // Payment succeeded, set status to 'paid'
-
+        $data = $response->json();
+        $status = $data['approved'];
+        if ($status) {
             $paymentDetail = PaymentDetail::where('booking_id', $booking->id)->first();
 
             if ($paymentDetail) {
-                $paymentDetail->update(['status' => $status]);
-                $booking->update(['status' => $status]);
+                $paymentDetail->update(['status' => 'paid']);
+                $booking->update(['status' => 'paid']);
                 return response()->json($data);
             } else {
                 PaymentDetail::create([
@@ -145,25 +145,23 @@ class BookingController extends Controller
                     'amount' => $amount,
                     'payment_id' => $token,
                     'payment_method' => 'card',
-                    'status' => $status,
+                    'status' => 'paid',
                     'date' => Carbon::now(),
                 ]);
-                $booking->update(['status' => $status]);
+                $booking->update(['status' => 'paid']);
                 return response()->json($data);
             }
         } else {
-            $status = 'failed';
-
             PaymentDetail::create([
                 'booking_id' => $booking->id,
                 'user_id' => auth()->user()->id,
                 'amount' => $amount,
                 'payment_id' => $token,
                 'payment_method' => 'card',
-                'status' => $status,
+                'status' => 'failed',
                 'date' => Carbon::now(),
             ]);
-            $booking->update(['status' => $status]);
+            $booking->update(['status' => 'failed']);
             return response()->json(['error' => $response->body()], 500);
         }
     }

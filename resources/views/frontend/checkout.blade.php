@@ -72,6 +72,7 @@
 
     </form>
     <p class="success-payment-message"></p>
+    <p class="failure-payment-message"></p>
 
 </div>
 
@@ -92,8 +93,9 @@
     position: absolute;
     top: 50%;
     z-index: 999;
-    font-size: 30px;
-    font-weight: 500;
+    font-size: 27px;
+    font-weight: 400;
+    text-align: center;
 }
 </style>
 @endpush
@@ -251,6 +253,7 @@ function onCardTokenizationFailed(error) {
 Frames.addEventHandler(Frames.Events.CARD_TOKENIZED, onCardTokenized);
 function onCardTokenized(event) {
     var el = document.querySelector(".success-payment-message");
+    var failure = document.querySelector(".failure-payment-message");
 
     // processPayment [POST] -> {(invoiceId/orderId .. .etc), cardToken}
     postData("{{ route('bookings.paymentProcess') }}", {
@@ -259,10 +262,8 @@ function onCardTokenized(event) {
     }).then((data) => {
         console.log(data);
         if (data.approved) {
-         // Hide the payment form with smooth animation
         form.style.transition = "opacity 0.5s";
         form.style.opacity = 0;
-
         // Show the success message with smooth animation
         el.innerHTML = `<p style="color:green">Your Payment is Successful</p>`;
         el.style.transition = "opacity 0.5s, transform 0.5s";
@@ -275,7 +276,7 @@ function onCardTokenized(event) {
             window.location.href = "{{ route('home') }}"; // Redirect to home page
         }, 3000); // Redirect after 3 seconds (adjust as needed)
         } else {
-            el.innerHTML = `<p style="color:red">Payment Failed</p>`;
+            failure.innerHTML = `<p style="color:red">Payment Failed</p>`;
         }
     });
 }

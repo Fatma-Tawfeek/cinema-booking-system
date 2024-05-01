@@ -8,9 +8,9 @@ use App\Http\Controllers\Admin\CinemaController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PaymentDetailController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\TimeslotController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Frontend;
 
 /*
@@ -63,7 +63,11 @@ Route::group([
     Route::get('schedules/{cinema}/timeslots', [ScheduleController::class, 'timeslots'])->name('schedules.timeslots');
     // Bookings Routes
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');
     Route::delete('/bookings/{booking}/cancel', [BookingController::class, 'destroy'])->name('bookings.destroy');
+    // Payemt Details Routes
+    Route::get('/payment-details', [PaymentDetailController::class, 'index'])->name('paymentDetails.index');
+    Route::delete('/payment-details/{paymentDetail}', [PaymentDetailController::class, 'destroy'])->name('paymentDetails.destroy');
 });
 
 Route::middleware('guest')->group(function () {
