@@ -43,7 +43,7 @@
                                 <td>{{ date('d M Y', strtotime($schedule->date)) }}</td>   
                                 <td>{{ date('h:i A', strtotime($schedule->timeslot->from)) }}</td>
                                 <td>{{ date('h:i A', strtotime($schedule->timeslot->to)) }}</td>
-                                <td>{{ $schedule->ticket_price }} leke</td>
+                                <td>{{ $schedule->ticket_price }} USD</td>
                                 <td> 
                                     <div class="btn-group">
                                         <a href="{{ route('admin.schedules.edit', $schedule->id) }}" class="btn btn-primary mr-2">

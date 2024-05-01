@@ -86,7 +86,7 @@
             ".row i.fa-solid.fa-couch.selected"
         );
         let totalPrice = selectedCouchesCount.length * ticketPrice;
-        total.innerText = totalPrice + " leke";
+        total.innerText = totalPrice + " USD";
 
         // Enable/disable button based on total price
         if (totalPrice > 0) {

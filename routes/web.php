@@ -34,8 +34,9 @@ Route::group([
     Route::get('/bookings/timeslots/{movie}', [Frontend\BookingController::class, 'getTimeslots'])->name('bookings.timeslots');
     Route::get('/bookings/seats', [Frontend\BookingController::class, 'getSeats'])->name('bookings.seats');
     Route::get('/bookings/eticket', [Frontend\BookingController::class, 'getEticket'])->name('bookings.eticket');
+    Route::post('/bookings/book', [Frontend\BookingController::class, 'book'])->name('bookings.book');
     Route::get('/bookings/checkout', [Frontend\BookingController::class, 'getCheckout'])->name('bookings.checkout');
-    Route::post('/bookings/checkout', [Frontend\BookingController::class, 'postCheckout'])->name('bookings.book');
+    Route::post('/bookings/checkout', [Frontend\BookingController::class, 'paymentProcess'])->name('bookings.paymentProcess');
 });
 
 // Admin Routes

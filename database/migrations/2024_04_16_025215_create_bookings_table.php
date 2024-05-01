@@ -21,7 +21,12 @@ return new class extends Migration
             $table->date('date');
             $table->time('from');
             $table->time('to');
-            $table->decimal('total_price', 8, 2);
+            $table->string('seats_codes');
+            $table->decimal('sub_total', 8, 2);
+            $table->decimal('seat_price', 8, 2);
+            $table->integer('seats_count');
+            $table->decimal('grand_total', 8, 2);
+            $table->enum('status', ['paid', 'failed'])->nullable();
             $table->timestamps();
         });
     }

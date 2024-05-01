@@ -9,7 +9,7 @@ class Booking extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'cinema_id', 'movie_id', 'cinema_timeslot_id', 'cinema_movies_schedule_id', 'date', 'from', 'to', 'total_price'];
+    protected $fillable = ['user_id', 'cinema_id', 'movie_id', 'cinema_timeslot_id', 'cinema_movies_schedule_id', 'date', 'from', 'to', 'seats_codes', 'sub_total', 'grand_total', 'status', 'seat_price', 'seats_count'];
 
     public function user()
     {
@@ -39,5 +39,10 @@ class Booking extends Model
     public function seats()
     {
         return $this->belongsToMany(Seat::class);
+    }
+
+    public function paymentDetail()
+    {
+        return $this->hasOne(PaymentDetail::class);
     }
 }

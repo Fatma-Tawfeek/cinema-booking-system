@@ -72,7 +72,7 @@
                       @enderror
                       </div>
                       <div class="form-group">
-                        <label for="">Ticket Price in leke</label>
+                        <label for="">Ticket Price in USD</label>
                         <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="Enter price" value="{{ $schedule->ticket_price }}" >
                         @error('price')
                         <div class="invalid-feedback">

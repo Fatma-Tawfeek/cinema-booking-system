@@ -16,13 +16,13 @@
         <div class="ticket-columns">
           <div>
             <p>{{ $seats_codes }}</p>
-            <p>Convenience fees</p>
+            <p>VAT. (14%)</p>
             <p>Sub total</p>
           </div>
           <div>
-            <p>{{ $total_price }} leke</p>
-            <p>40 leke</p>
-            <p>{{ $total_price + 40 }} leke</p>
+            <p>{{ $total_price }} USD</p>
+            <p>{{ $total_price * 0.14 }} USD</p>
+            <p>{{ $total_price + ($total_price * 0.14) }} USD</p>
           </div>
         </div>
         
@@ -32,7 +32,10 @@
           <div class="ticket-header">
             <p>By Proceeding, I express my consent to complete this transaction</p>
           </div>
-          <a href="{{ route('bookings.checkout') }}?schedule_id={{ $schedule->id }}&totalPrice={{ $total_price + 40 }}&seatIds={{ $seats_ids }}" class="book-ticket">Proceed</a>
+          <form action="{{ route('bookings.book', ['schedule_id' => $schedule->id, 'totalPrice' => $total_price , 'seatIds' => $seats_ids, 'seatsCodes' => $seats_codes]) }}" method="post">
+            @csrf
+            <button href="{{ route('bookings.checkout') }}" class="book-ticket" type="submit">Proceed</button>
+          </form>
         </div>
       </div>
       
