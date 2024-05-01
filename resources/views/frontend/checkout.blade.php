@@ -93,8 +93,8 @@
     position: absolute;
     top: 50%;
     z-index: 999;
-    font-size: 27px;
-    font-weight: 400;
+    font-size: 23px;
+    font-weight: 500;
     text-align: center;
 }
 </style>
@@ -272,8 +272,8 @@ function onCardTokenized(event) {
 
 
         // Optionally, you can add a delay to redirect the user to another page
-        setTimeout(function() {
-            window.location.href = "{{ route('home') }}"; // Redirect to home page
+        // setTimeout(function() {
+         window.location.href = "{{ route('home') }}"; // Redirect to home page
         }, 3000); // Redirect after 3 seconds (adjust as needed)
         } else {
             failure.innerHTML = `<p style="color:red">Payment Failed</p>`;
