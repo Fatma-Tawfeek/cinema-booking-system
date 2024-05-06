@@ -256,29 +256,13 @@ function onCardTokenized(event) {
     var failure = document.querySelector(".failure-payment-message");
 
     // processPayment [POST] -> {(invoiceId/orderId .. .etc), cardToken}
-    postData("{{ route('bookings.paymentProcess') }}", {
+    postData("{{ route('bookings.paymentProcess', $booking->id) }}", {
         bookingId: {{ $booking->id }},
         cardToken: event.token,
     }).then((data) => {
         console.log(data);
-        if (data.approved) {
-        form.style.transition = "opacity 0.5s";
-        form.style.opacity = 0;
-        // Show the success message with smooth animation
-        el.innerHTML = `<p style="color:green">Your Payment is Successful</p>`;
-        el.style.transition = "opacity 0.5s, transform 0.5s";
-        el.style.opacity = 1;
-        el.style.transform = "translateY(0)";
-
-
-        // Optionally, you can add a delay to redirect the user to another page
-        // setTimeout(function() {
-         window.location.href = "{{ route('home') }}"; // Redirect to home page
-        }, 3000); // Redirect after 3 seconds (adjust as needed)
-        } else {
-            failure.innerHTML = `<p style="color:red">Payment Failed</p>`;
-        }
-    });
+        window.location.href = "{{ route('bookings.confirm')}}";
+});
 }
 
 Frames.addEventHandler(

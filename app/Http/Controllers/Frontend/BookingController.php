@@ -95,24 +95,17 @@ class BookingController extends Controller
             ]);
         }
 
-        session()->put('booking', $booking);
-
-        return redirect()->route('bookings.checkout');
-    }
-
-    public function getCheckout()
-    {
-        $booking = session('booking');
-        if (!$booking) {
-            abort(404);
-        }
         return view('frontend.checkout', compact('booking'));
     }
 
-    public function paymentProcess(Request $request)
+    public function getCheckout(Booking $booking)
     {
-        $booking = Booking::findOrFail($request->input('bookingId'));
-        $amount = $booking->grand_total; // Amount in dollars
+        return view('frontend.checkout', compact('booking'));
+    }
+
+    public function paymentProcess(Request $request, Booking $booking)
+    {
+        $amount = $booking->grand_total;
         $token = $request->input('cardToken');
 
         $response = Http::withHeaders([
@@ -139,7 +132,7 @@ class BookingController extends Controller
                 $booking->update(['status' => 'paid']);
                 return response()->json($data);
             } else {
-                PaymentDetail::create([
+                $paymentDetail = PaymentDetail::create([
                     'booking_id' => $booking->id,
                     'user_id' => auth()->user()->id,
                     'amount' => $amount,
@@ -149,10 +142,11 @@ class BookingController extends Controller
                     'date' => Carbon::now(),
                 ]);
                 $booking->update(['status' => 'paid']);
-                return response()->json($data);
+                session(['paymentDetailId' => $paymentDetail->id]);
+                return response()->json(['paymentDetailId' => $paymentDetail->id, 'data' => $data]);
             }
         } else {
-            PaymentDetail::create([
+            $paymentDetail = PaymentDetail::create([
                 'booking_id' => $booking->id,
                 'user_id' => auth()->user()->id,
                 'amount' => $amount,
@@ -162,7 +156,15 @@ class BookingController extends Controller
                 'date' => Carbon::now(),
             ]);
             $booking->update(['status' => 'failed']);
-            return response()->json(['error' => $response->body()], 500);
+            session(['paymentDetailId' => $paymentDetail->id]);
+            return response()->json(['paymentDetailId' => $paymentDetail->id, 'data' => $data], 500);
         }
+    }
+
+    public function getConfirm()
+    {
+        $paymentDetailId = session('paymentDetailId');
+        $paymentDetail = PaymentDetail::find($paymentDetailId);
+        return view('frontend.invoice', compact('paymentDetail'));
     }
 }

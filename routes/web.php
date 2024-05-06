@@ -31,12 +31,18 @@ Route::get('/movies/{movie}', [HomeController::class, 'show'])->name('movies.sho
 Route::group([
     'middleware' => ['auth'],
 ], function () {
+    // Booking Proccess
     Route::get('/bookings/timeslots/{movie}', [Frontend\BookingController::class, 'getTimeslots'])->name('bookings.timeslots');
     Route::get('/bookings/seats', [Frontend\BookingController::class, 'getSeats'])->name('bookings.seats');
     Route::get('/bookings/eticket', [Frontend\BookingController::class, 'getEticket'])->name('bookings.eticket');
     Route::post('/bookings/book', [Frontend\BookingController::class, 'book'])->name('bookings.book');
-    Route::get('/bookings/checkout', [Frontend\BookingController::class, 'getCheckout'])->name('bookings.checkout');
-    Route::post('/bookings/checkout', [Frontend\BookingController::class, 'paymentProcess'])->name('bookings.paymentProcess');
+    Route::get('/bookings/checkout/{booking}', [Frontend\BookingController::class, 'getCheckout'])->name('bookings.checkout');
+    Route::post('/bookings/checkout/{booking}', [Frontend\BookingController::class, 'paymentProcess'])->name('bookings.paymentProcess');
+    Route::get('/bookings/confirm', [Frontend\BookingController::class, 'getConfirm'])->name('bookings.confirm');
+
+    // Bookings
+    Route::get('/bookings', [Frontend\UserController::class, 'getUserBookings'])->name('bookings.index');
+    Route::get('/bookings/{booking}', [Frontend\UserController::class, 'getBooking'])->name('bookings.show');
 });
 
 // Admin Routes

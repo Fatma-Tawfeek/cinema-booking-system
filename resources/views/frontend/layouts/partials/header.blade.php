@@ -7,6 +7,9 @@
         <li><a href="#movies">Movies</a></li>
         <li><a href="#coming">Coming</a></li>
         <li><a href="#contact">Contact</a></li>
+        @auth
+            <li><a href="{{ route('bookings.index') }}">My Bookings</a></li>
+        @endauth
     </ul>
     @guest
     <a href="{{ route('login') }}" class="btn">Sign In</a>

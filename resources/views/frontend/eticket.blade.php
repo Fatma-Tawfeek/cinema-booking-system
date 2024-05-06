@@ -34,7 +34,7 @@
           </div>
           <form action="{{ route('bookings.book', ['schedule_id' => $schedule->id, 'totalPrice' => $total_price , 'seatIds' => $seats_ids, 'seatsCodes' => $seats_codes]) }}" method="post">
             @csrf
-            <button href="{{ route('bookings.checkout') }}" class="book-ticket" type="submit">Proceed</button>
+            <button class="book-ticket" type="submit">Proceed</button>
           </form>
         </div>
       </div>
