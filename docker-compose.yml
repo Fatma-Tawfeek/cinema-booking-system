@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.yml
+    image: mylaravelapp
+    container_name: mylaravelapp
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - app-network
+
+  db:
+    image: mysql:5.7
+    container_name: mysqldb
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3307:3307"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - app-network
+
+# Volumes
+volumes:
+  dbdata:
+    driver: local
+
+# Networks
+networks:
+  app-network:
+    driver: bridge
