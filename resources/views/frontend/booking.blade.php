@@ -52,24 +52,24 @@
     
 <div class="showtimes-container {{ $loop->first ? 'active' : '' }}" aria-hidden="false">
     @foreach ($cinemas as $cinemaName => $schedules)
-    <div class="venue-container">
-        <div class="venue-1">
-            <div class="venue-name">
-                <p>{{ $cinemaName }} </p>
+
+    <div class="cinema-container">
+        <div class="venue-container">
+            <div class="venue-1">
+                <div class="venue-name">
+                    <p>{{ $cinemaName }} </p>
+                </div>
             </div>
         </div>
+        <div class="dates-container">
+                <div class="showtime-content">
+                    @foreach ($schedules as $schedule)
+                    <button onclick="togglePopup()" class="showtime" data-schedule-id="{{ $schedule->id }}">{{ date('h:i A', strtotime($schedule->timeslot->from)) }}</button>
+                    @endforeach
+                </div>
+        </div>
     </div>
-    <div class="dates-container">
-        <a href="#" class="showtime-link" rel="noreferrer">
-            <div class="showtime-content">
-                @foreach ($schedules as $schedule)
-
-                <button onclick="togglePopup()" class="showtime" data-schedule-id="{{ $schedule->id }}">{{ date('h:i A', strtotime($schedule->timeslot->from)) }}</button>
-
-                @endforeach
-            </div>
-        </a>
-    </div>
+   
     @endforeach
 </div>
 @endforeach
@@ -110,8 +110,14 @@
         display: none;
     }
 
-    .showtimes-container.active {
+    .cinema-container {
         display: flex;
+        margin-bottom: 2rem;
+    }
+
+    .showtimes-container.active {
+        display: block;
+        /* flex-direction: column; */
     }
     .selected {
         border-radius: 50%;
@@ -121,6 +127,9 @@
     .selected {
     color: red;
     background-color: white;
+    }
+    .showtime-content {
+        width: 100%;
     }
 
 </style>
@@ -156,4 +165,3 @@
 
   </script>
 @endpush
-
