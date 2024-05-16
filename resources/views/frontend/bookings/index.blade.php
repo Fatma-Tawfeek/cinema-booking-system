@@ -29,7 +29,12 @@
                         <td>{{ date('d M Y', strtotime($booking->created_at)) }}</td>
                         <td>${{ $booking->grand_total }}</td>  
                         <td><span class="status-badge {{ $booking->status == 'paid' ? 'paid' : 'failed' }}">{{ $booking->status }}</span></td>
-                        <td><a href="{{ route('bookings.show', $booking->id) }}" class="view-btn"><i class="fas fa-eye"></i></a></td>
+                        <td>
+                            @if ($booking->status == 'failed')
+                            <a href="{{ route('bookings.checkout', $booking->id) }}" class="pay-btn"><i class="fas fa-redo"></i> pay again</a>
+                            @endif
+                            <a href="{{ route('bookings.show', $booking->id) }}" class="view-btn"><i class="fas fa-eye"></i></a>
+                        </td>
                         </tr>
                         @empty
                         <td colspan="6">No bookings found.</td>                            
@@ -90,7 +95,15 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .pagination-container {
+        .pay-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+ .pagination-container {
     margin-top: 20px;
     text-align: center;
 }
